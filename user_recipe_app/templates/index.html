@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Recipe Swap</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <h1 class="text-center">Welcome to HMG's Recipe Swap Page</h1>
+        <h2 class="text-center">Please Register or Login</h2>
+
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-6">
+                    <h3 class='text-center'>Register</h3>
+                    <form action="/register" method="POST">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label for="nick_name">User Name</label>
+                            <input class="form-control" type="text" name="nick_name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input class="form-control" type="text" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input class="form-control" type="text" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_password">Confirm Password</label>
+                            <input class="form-control" type="text" name="confirm_password">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Register</button>
+                        
+                        
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="text-center">Login</h3>
+                    <form action="/login" method="POST">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input class="form-control" type="text" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input class="form-control" type="password" name="password">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>
