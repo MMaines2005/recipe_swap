@@ -1,0 +1,21 @@
+Github 
+https://github.com/MMaines2005/recipe_swap.git
+
+Recipe Swap:
+
+Is going to be where people can come and look up new and fun recipes. Made by other people, and even share some of their
+own recipes!!
+
+My main goals to this is to get people to post their recipes.
+
+Features:
+
+Dashboard will show the news posted recipes, along with the user rating
+
+User rating will be judged by how many recipes they post and how many likes or added on each recipe.
+
+If you like one user over others Their post will be added to the top of list.
+
+I'll have a area where you can post a comment to be seen by everyone about recipe.
+
+Plus have a edit page so you can fix anything you may have messed up.
