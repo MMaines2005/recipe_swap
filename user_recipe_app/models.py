@@ -57,7 +57,31 @@ class User(models.Model):
     nick_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
+    liked_recipes = models.ManyToManyField('Recipe', related_name='liked_recipes')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     objects = UserManager()
+
+
+class RecipeManager(models.Manager):
+    def validate_recipe(self, post_data):
+        errors = {}
+        if len(post_data['recipe_name']) < 3:
+            errors['recipe_name'] = "Recipe name must be at least 3 characters."
+        if len(post_data['recipe_instructions']) < 15:
+            errors['recipe_instructions'] = "Description must be at least 15 characters."
+        return errors
+
+class Recipe(models.Model):
+    recipe_name = models.CharField(max_length=255)
+    recipe_ingredients = models.TextField()
+    recipe_instructions = models.TextField()
+    # image = models.ImageField(upload_to='images/')
+    recipe_servings = models.TextField()
+    recipe_cook_time = models.TextField()
+    created_by_user = models.ForeignKey(User, related_name="recipes", on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = RecipeManager()
+

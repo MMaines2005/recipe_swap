@@ -1,6 +1,7 @@
+from distutils.log import error
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import  User, UserManager
+from .models import  User, UserManager, Recipe, RecipeManager
 import bcrypt
 
 # Create your views here.
@@ -48,11 +49,58 @@ def success(request):
     if 'user_id' not in request.session:
         return redirect('/')
     this_user = User.objects.filter(id=request.session['user_id'])
+
+    
     context = {
-        'user': this_user[0]
+        'all_recipes': Recipe.objects.all(),
+        'user': this_user[0],
+        'user_recipes': Recipe.objects.filter(created_by_user=this_user[0]),
     }
     return render(request, 'dashboard.html', context)
 
 def logout(request):
-    request.session.clear()
+    request.session.flush()
     return redirect('/')
+
+# Recipes logic goes here
+
+def add_recipe(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    this_user = User.objects.filter(id=request.session['user_id'])
+
+    context = {
+        'user': this_user[0]
+    }
+    
+    return render(request, 'add_recipe.html', context)
+
+def create_recipe(request):
+    errors = Recipe.objects.validate_recipe(request.POST)
+    if len(errors) != 0:
+        for value in errors.items():
+            messages.error(request, value)
+        return redirect('/add_recipe')
+    else:
+        this_user = User.objects.filter(id=request.session['user_id'])
+        recipe = Recipe.objects.create(
+            recipe_name = request.POST['recipe_name'],
+            recipe_ingredients= request.POST['recipe_ingredients'],
+            recipe_instructions= request.POST['recipe_instructions'],
+            recipe_servings = request.POST['recipe_instructions'],
+            recipe_cook_time = request.POST['recipe_instructions'],
+            created_by_user = this_user[0],
+            )
+    
+    return redirect(f'/recipe_detail/{recipe.id}')
+
+def recipe_detail(request, recipe_id):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    this_user = User.objects.filter(id=request.session['user_id'])
+    this_recipe = Recipe.objects.filter(id=recipe_id)
+    context = {
+        'user': this_user[0],
+        'one_recipe': this_recipe[0],
+    }
+    return render(request, 'show_one.html', context)

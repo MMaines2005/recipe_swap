@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Title Page</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <nav>
+            <a class="btn btn-primary" href="/dashboard">Home</a>
+            <a class="btn btn-danger" href="/logout" >Logout</a>
+        </nav>
+        
+        <h1 class="text-center">Add a New Recipe</h1>
+        {% for message in messages %}
+                    <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <form action="/create_recipe" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="recipe_name">Recipe Name</label>
+                            <input type="text" name="recipe_name" id="recipe_name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipe_ingredients">Ingredients</label>
+                            <textarea name="recipe_ingredients" id="recipe_ingredients" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipe_instructions">Instructions</label>
+                            <textarea name="recipe_instructions" id="recipe_instructions" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipe_servings">Servings</label>
+                            <input type="text" name="recipe_servings" id="recipe_servings" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipe_cook_time">Cook Time</label>
+                            <input type="text" name="recipe_cook_time" id="recipe_cook_time" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipe_image">Image</label>
+                            <input type="text" name="recipe_image" id="recipe_image" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>   
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

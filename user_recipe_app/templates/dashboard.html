@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Title Page</title>
+        <title>Dashboard</title>
 
         <!-- Bootstrap CSS -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -19,9 +19,68 @@
     </head>
     <body>
         <nav>
-            <a class="btn btn-danger" href="/logout" >Logout</a>
+            <a class="btn btn-primary" href="/add_recipe">Add Recipe</a>
+            <a class="btn btn-danger" href="/logout" >Logout</a>   
+            
+            
         </nav>
-        <h1 class="text-center">Hello {{user.nick_name}}</h1>
+        <h1 class="text-center">Welcome, {{user.nick_name}}</h1>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h3 class="text-center">Your Recipes</h3>
+                    <ul>
+                        
+                        {% for user_recipe in user_recipes %}
+                        <li>
+                            <a href="/recipe_detail/{{recipe.id}}">{{user_recipe.recipe_name}}</a>
+                        </li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h3 class="text-center">All Recipes</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Recipe Name</th>
+                                <th>Recipe Preview</th>
+                                <th>Posted By</th>
+                                <th>Date Created</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for recipe in all_recipes %}
+                                <tr>
+                                    <td>{{recipe.recipe_name}}</td>
+                                    <td>{{recipe.recipe_instructions}}</td>
+                                    <td>{{recipe.created_by_user.nick_name}}</td>                                
+                                    <td>{{recipe.created_at}}</td>                                
+                                    <td>
+                                        <a href="/recipe_detail/{{recipe.id}}">Detail Page</a>
+                                        
+                                        <a href="#">Update</a>
+                                        <a href="#">Delete</a>
+                                    
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            
+                    </table>    
+                </div>
+                <div class="col-md-3">
+                    <h3 class="text-center">Like Recipes</h3>
+                    <ul>
+                        {% for recipe in liked_recipes %}
+                            <li>{{recipe.recipe_name}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
 
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
