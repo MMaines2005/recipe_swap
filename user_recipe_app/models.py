@@ -77,7 +77,6 @@ class Recipe(models.Model):
     recipe_name = models.CharField(max_length=255)
     recipe_ingredients = models.TextField()
     recipe_instructions = models.TextField()
-    # image = models.ImageField(upload_to='images/')
     recipe_servings = models.TextField()
     recipe_cook_time = models.TextField()
     created_by_user = models.ForeignKey(User, related_name="recipes", on_delete=models.CASCADE)

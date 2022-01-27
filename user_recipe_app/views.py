@@ -82,6 +82,7 @@ def add_recipe(request):
 
     context = {
         'user': this_user[0]
+        
     }
     
     return render(request, 'add_recipe.html', context)
@@ -118,16 +119,13 @@ def recipe_detail(request, recipe_id):
 
 def update_recipe(request, recipe_id):
     recipe_to_update = Recipe.objects.get(id=recipe_id)
-    if recipe_to_update.created_by_user.id != request.session['user_id']:
-        messages.error(request, "This isn't yours to update.")
-        redirect('/edit_page/{{recipe_id}}')
-    else:
-        recipe_to_update.recipe_name = request.POST['recipe_name']
-        recipe_to_update.recipe_ingredients = request.POST['recipe_ingredients']
-        recipe_to_update.recipe_instructions = request.POST['recipe_instructions']
-        recipe_to_update.recipe_servings = request.POST['recipe_servings']
-        recipe_to_update.recipe_cook_time = request.POST['recipe_cook_time']
-        recipe_to_update.save()
+    
+    recipe_to_update.recipe_name = request.POST['recipe_name']
+    recipe_to_update.recipe_ingredients = request.POST['recipe_ingredients']
+    recipe_to_update.recipe_instructions = request.POST['recipe_instructions']
+    recipe_to_update.recipe_servings = request.POST['recipe_servings']
+    recipe_to_update.recipe_cook_time = request.POST['recipe_cook_time']
+    recipe_to_update.save()
 
     return redirect('/dashboard')
 
