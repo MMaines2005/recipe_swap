@@ -25,6 +25,9 @@
             
         </nav>
         <h1 class="text-center">Welcome, {{user.nick_name}}</h1>
+        {% for message in messages %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
 
         <div class="container">
             <div class="row">
@@ -57,13 +60,14 @@
                                 <tr>
                                     <td>{{recipe.recipe_name}}</td>
                                     <td>{{recipe.recipe_instructions}}</td>
-                                    <td>{{recipe.created_by_user.nick_name}}</td>                                
+                                    <td>{{recipe.created_by_user.nick_name}}</td>   
+                                                                 
                                     <td>{{recipe.created_at}}</td>                                
                                     <td>
                                         <a href="/recipe_detail/{{recipe.id}}">Detail Page</a>
                                         
-                                        <a href="#">Update</a>
-                                        <a href="#">Delete</a>
+                                        <a href="/edit_page/{{recipe.id}}">Update</a>
+                                        <a href="/delete_recipe/{{recipe.id}}">Delete</a>
                                     
                                     </td>
                                 </tr>

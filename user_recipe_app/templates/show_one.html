@@ -18,6 +18,7 @@
         <![endif]-->
     </head>
     <body>
+        <div class="container ">
         <nav>
             <a class="btn btn-primary" href="/dashboard">Home</a>
             <a class="btn btn-primary" href="/add_recipe">Add Recipe</a>
@@ -26,7 +27,41 @@
             
             
 
-        <h1 class="text-center">{{one_recipe.recipe_name}} Recipe Page</h1>
+        <div class="row">
+                <h1 class="text-center">{{one_recipe.recipe_name}} Recipe Page</h1>
+                <div class="col-md-3">
+                    <div>                         
+                        
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div>
+                        <div>
+                            <h2 class="text-center">Ingredients: </h2class>
+                            <h4 class="text-center">{{one_recipe.recipe_ingredients}}</h4>
+                        </div>
+                        <div>
+                            <h2 class="text-center">Instructions:</h2>
+                            <h4 class="text-center">{{one_recipe.recipe_instructions}}</h4>
+                        </div>
+                        <div>
+                            <h2 class="text-center">Servings: </h2>
+                            <h4 class="text-center">{{one_recipe.recipe_servings}}</h4>
+                        </div>
+                        <div>
+                            <h2 class="text-center">Cook Time:</h2>
+                            <h4 class="text-center">{{one_recipe.recipe_cook_time}}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="text-center">
+                        <h2 class="text-left">Posted By: </h2>
+                        <h4 class="text-left">{{one_recipe.created_by_user.nick_name}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

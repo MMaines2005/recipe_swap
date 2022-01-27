@@ -64,6 +64,17 @@ def logout(request):
 
 # Recipes logic goes here
 
+def update_page(request, recipe_id):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    this_user = User.objects.filter(id=request.session['user_id'])
+    this_recipe = Recipe.objects.filter(id=recipe_id)
+    context = {
+        'user': this_user[0],
+        'one_recipe': this_recipe[0],
+    }
+    return render(request, 'update_recipe.html', context)
+
 def add_recipe(request):
     if 'user_id' not in request.session:
         return redirect('/')
@@ -104,3 +115,28 @@ def recipe_detail(request, recipe_id):
         'one_recipe': this_recipe[0],
     }
     return render(request, 'show_one.html', context)
+
+def update_recipe(request, recipe_id):
+    recipe_to_update = Recipe.objects.get(id=recipe_id)
+    if recipe_to_update.created_by_user.id != request.session['user_id']:
+        messages.error(request, "This isn't yours to update.")
+        redirect('/edit_page/{{recipe_id}}')
+    else:
+        recipe_to_update.recipe_name = request.POST['recipe_name']
+        recipe_to_update.recipe_ingredients = request.POST['recipe_ingredients']
+        recipe_to_update.recipe_instructions = request.POST['recipe_instructions']
+        recipe_to_update.recipe_servings = request.POST['recipe_servings']
+        recipe_to_update.recipe_cook_time = request.POST['recipe_cook_time']
+        recipe_to_update.save()
+
+    return redirect('/dashboard')
+
+
+def delete_recipe(request, recipe_id):
+    recipe_to_delete = Recipe.objects.get(id=recipe_id)
+    if recipe_to_delete.created_by_user.id == request.session['user_id']:
+        recipe_to_delete.delete()
+    else:
+        messages.error(request, "This isn't yours to delete.")
+    
+    return redirect('/dashboard')
