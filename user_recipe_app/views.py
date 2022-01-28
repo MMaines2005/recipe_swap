@@ -127,7 +127,7 @@ def update_recipe(request, recipe_id):
     recipe_to_update.recipe_cook_time = request.POST['recipe_cook_time']
     recipe_to_update.save()
 
-    return redirect('/dashboard')
+    return redirect(f'/recipe_detail/{recipe_id}')
 
 
 def delete_recipe(request, recipe_id):

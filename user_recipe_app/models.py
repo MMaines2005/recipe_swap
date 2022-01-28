@@ -57,7 +57,6 @@ class User(models.Model):
     nick_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
-    liked_recipes = models.ManyToManyField('Recipe', related_name='liked_recipes')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -79,7 +78,7 @@ class Recipe(models.Model):
     recipe_instructions = models.TextField()
     recipe_servings = models.TextField()
     recipe_cook_time = models.TextField()
-    created_by_user = models.ForeignKey(User, related_name="recipes", on_delete=models.CASCADE)
+    created_by_user = models.ForeignKey(User, related_name="recipes", on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = RecipeManager()
