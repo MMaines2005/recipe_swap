@@ -79,6 +79,7 @@ class Recipe(models.Model):
     recipe_servings = models.TextField()
     recipe_cook_time = models.TextField()
     created_by_user = models.ForeignKey(User, related_name="recipes", on_delete=models.CASCADE, null=True)
+    # liked_by_users = models.ManyToManyField(User, related_name="liked_recipes")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = RecipeManager()

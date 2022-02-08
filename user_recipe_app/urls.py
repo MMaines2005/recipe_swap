@@ -18,4 +18,8 @@ urlpatterns = [
     # Delete paths with the recipe_id into the Delete function 
     path('delete_recipe/<int:recipe_id>', views.delete_recipe, name='delete_recipe'),
 
+    #to like and unlike a recipe
+    # path('like_recipe/<int:recipe_id>', views.fav_recipe),
+    # path('unlike_recipe/<int:recipe_id>', views.unfav_recipe),
+
 ]

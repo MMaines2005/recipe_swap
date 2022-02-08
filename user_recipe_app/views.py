@@ -138,3 +138,18 @@ def delete_recipe(request, recipe_id):
         messages.error(request, "This isn't yours to delete.")
     
     return redirect('/dashboard')
+
+# def fav_recipes(request, recipe_id):
+#     user = User.objects.get(id=request.session['user_id'])
+#     recipe = Recipe.objects.get(id=recipe_id)
+#     recipe.liked_by_user.add(user)
+
+#     return redirect('/dashboard')
+
+
+# def unfav_recipes(request, recipe_id):
+#     user = User.objects.get(id=request.session['user_id'])
+#     recipe = Recipe.objects.get(id=recipe_id)
+#     recipe.liked_by_user.remove(user)
+
+#     return redirect('/dashboard')
